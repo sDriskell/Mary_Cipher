@@ -2,7 +2,7 @@
 import sys
 import string
 import load_dictionary
-
+from random import randint
 
 # secret message to pass
 MESSAGE = "Give your word and we rise"
@@ -20,12 +20,27 @@ def main():
     """Generate names with MESSAGE embedded"""
     # open dictionary file
     name_list = load_dictionary.load("supporters.txt")
+    # prep and parse MESSAGE for comparison process
+    message = ''
+    for char in MESSAGE.lower():
+        if char in string.ascii_letters:
+            message += char
+    message = ''.join(message.split())
     output_names = []
-    for i in range(0, len(MESSAGE.split())+2):
-        if i % 2 == 0:
-            print(name_list[i][2])
-        elif i / 2 != 0:
-            print(name_list[i][3])
+
+    for letter in message:  # Breaks DRY, needs work
+        is_even = True
+        for name in name_list:
+            if letter == name[1] and is_even is True and name not in output_names:
+                output_names.append(name)
+                print(letter, name)
+                is_even = False
+                break
+            if letter == name[2] and is_even is False and name not in output_names:
+                output_names.append(name)
+                print(letter, name)
+                is_even = True
+                break
 
 
 if __name__ == "__main__":
