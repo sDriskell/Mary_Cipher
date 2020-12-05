@@ -27,16 +27,15 @@ def main():
             message += char
     message = ''.join(message.split())
     output_names = []
-
+    is_even = True
     for letter in message:  # Breaks DRY, needs work
-        is_even = True
         for name in name_list:
-            if letter == name[1] and is_even is True and name not in output_names:
+            if is_even is True and letter == name[1] and name not in output_names:
                 output_names.append(name)
                 print(letter, name)
                 is_even = False
                 break
-            if letter == name[2] and is_even is False and name not in output_names:
+            elif is_even is False and letter == name[2] and name not in output_names:
                 output_names.append(name)
                 print(letter, name)
                 is_even = True
