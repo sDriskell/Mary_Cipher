@@ -14,6 +14,7 @@ Requires-import sys
 """
 import sys
 
+
 def load(file):
     """Open a text file & turn contents into a list of lowercase strings."""
     try:
