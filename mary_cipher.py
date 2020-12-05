@@ -5,7 +5,6 @@ import load_dictionary
 from random import randint
 
 # secret message to pass
-MESSAGE = "Give your word and we rise"
 FAKE_TEXT = "Merry Christmas from those named:\n"
 NAME1 = "JACOB"
 NAME2 = "STUART"
@@ -18,11 +17,12 @@ NAME2 = "STUART"
 
 def main():
     """Generate names with MESSAGE embedded"""
+    user_message = input("What is your message to encrypt? ")
     # open dictionary file
     name_list = load_dictionary.load("supporters.txt")
     # prep and parse MESSAGE for comparison process
     message = ''
-    for char in MESSAGE.lower():
+    for char in user_message.lower():
         if char in string.ascii_letters:
             message += char
     message = ''.join(message.split())
