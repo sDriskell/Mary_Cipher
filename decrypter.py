@@ -13,16 +13,19 @@ def load_text(file):
 
 def solve_cipher(message_list, count):  # code message: drinkovaltine
     """Search for nth letter in nth words"""
-    results = ""
-    # count every nth word
-    word_list = message_list[count::count+1]
-    print(word_list)
-    # count every nth char
-    for word in word_list:
-        # combine into a string
-        results += word[count]
-    # print string
-    print(results)
+
+    for i in range(0, count):
+        results = ""
+        # count every nth word
+        word_list = message_list[i::i+1]
+        # count every nth char
+        for word in word_list:
+            try:
+                results += word[i]
+            except IndexError:
+                # word length too short
+                pass
+        print("Iteration: ", i+1, "\tPossible results: ", results)
 
 
 def main():
