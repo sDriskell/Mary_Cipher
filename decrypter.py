@@ -1,8 +1,8 @@
 """Decrypt text file to find hidden message
 
 find nth letter in nth word to decrypt text file"""
-import sys
 import string
+import re
 
 
 def load_text(file):
@@ -31,12 +31,17 @@ def solve_cipher(message_list, count):  # code message: drinkovaltine
 def main():
     """Decipher coded text file"""
     message = load_text("colchester_message.txt")
-    count = int(input("How many steps to count word/char? "))
+    count = 0
+    while True:
+        user_input = input("Enter an integer for nth count: ")
+        try:
+            count = int(user_input)
+            break
+        except ValueError:
+            print("Not a proper integer.")
+
     # strip punctuation, whitespace, and newlines from message
-    exclude = set(string.punctuation)
-    message = ''.join(ch for ch in message if ch not in exclude)  # help from Ashish Cherian on Stack Overflow
-    message = message.replace('\n', '').replace("  ", " ")  # yuck; need something better here
-    message_list = message.split(" ")
+    message_list = re.split(r'[;,\s]\s*', message)
 
     solve_cipher(message_list, count)
 
